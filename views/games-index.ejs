@@ -3,13 +3,13 @@
 <ul>
   <% games.forEach(function(game) { %>
     <li>
-      <a href="<%= "/game/" + game.name %>">
-        <%= game.name %>
+      <a href="<%= "/game/" + game.gameName %>">
+        <%= game.gameName %>
       </a>
 
       ----------------
 
-      <a class="delete-link" href="<%= "/game/" + game.name %>">
+      <a class="delete-link" href="<%= "/game/" + game.gameName %>">
         Delete
       </a>
     </li>

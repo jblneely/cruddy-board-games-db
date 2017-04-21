@@ -5,6 +5,8 @@ var path = require('path');
 var fs = require('fs');
 var ejsLayouts = require("express-ejs-layouts");
 var bodyParser = require('body-parser');
+var db = require('./models');
+
 
 var app = express();
 
@@ -24,9 +26,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/games', function(req, res) {
-    var games = getGames();
-
-    res.render('games-index', { games: games });
+    db.game.findAll().then(function(games) {
+        res.render('games-index', { games: games });
+    }).catch(function(error) {
+        res.status(404).send(error);
+    });
 });
 
 app.get('/games/new', function(req, res) {
@@ -39,7 +43,7 @@ app.post('/games', function(req, res) {
 
     var games = getGames();
     games.push(newGame);
-    saveGames(games);
+    // saveGames(games);
 
     res.redirect('/games');
 });
@@ -71,7 +75,8 @@ app.put('/game/:name', function(req, res) {
     game.name = theNewGameData.name;
     game.description = theNewGameData.description;
 
-    saveGames(games);
+    // saveGames(games);
+
 
     res.send(req.body);
 });
@@ -84,7 +89,7 @@ app.delete('/game/:name', function(req, res) {
 
     games.splice(indexOfGameToDelete, 1);
 
-    saveGames(games);
+    // saveGames(games);
 
     res.send(game);
 });
@@ -105,16 +110,10 @@ function getGame(games, nameOfTheGame) {
 }
 
 // Read list of games from file.
-function getGames() {
-    var fileContents = fs.readFileSync('./games.json'); // :'(
-    var games = JSON.parse(fileContents);
-    return games;
-}
+
 
 // Write list of games to file.
-function saveGames(games) {
-    fs.writeFileSync('./games.json', JSON.stringify(games));
-}
+
 
 // start the server
 

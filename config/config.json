@@ -1,0 +1,17 @@
+{
+    "development": {
+        "database": "jblneely",
+        "host": "127.0.0.1",
+        "dialect": "postgres"
+    },
+    "test": {
+        "database": "jblneely_test",
+        "host": "127.0.0.1",
+        "dialect": "postgres"
+    },
+    "production": {
+        "database": "jblneely_production",
+        "host": "127.0.0.1",
+        "dialect": "postgres"
+    }
+}

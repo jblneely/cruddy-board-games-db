@@ -4,11 +4,17 @@
 
 
 <form id="edit-game" action="<%= '/game/' + name %>" method="PUT">
+
   <label for="name">Name:</label>
   <input name="name" type="text" value="<%= name %>">
 
+  <label for="number-of-players">Number of Players:</label>
+  <input type="number" name="quantity"  value="<%= number %>" min="1" max="10">
+
   <label for="description">Description:</label>
   <textarea name="description" cols="30" rows="10"><%= description %></textarea>
+
+
 
   <input type="submit" value="Edit game!">
 </form>
