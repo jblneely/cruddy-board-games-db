@@ -109,11 +109,58 @@ function getGame(games, nameOfTheGame) {
     return game;
 }
 
+
+module.exports = function(sequelize, DataTypes) {
+    var user = sequelize.define("user", {
+
+            text: {
+                type: DataTypes.STRING,
+                validate: {
+                    text: true
+                }
+            },
+            number: {
+                type: DataTypes.INTEGER,
+                validate: {
+                    number: true
+                }
+            },
+        },
+
+        {
+            classMethods: {
+                associate: function(models) {
+                    // associations can be defined here
+                }
+            }
+        });
+
+    return user;
+};
+
 // Read list of games from file.
+
+db.user.findOrCreate({
+    where: {
+        name: '',
+        description: '',
+        numberOfPlayers:
+    },
+    defaults: {}
+}).spread(function(name, description) {
+    console.log(user);
+});
 
 
 // Write list of games to file.
 
+db.user.create({
+    game: '',
+    description: '',
+    numberOfPlayers:
+}).then(function(user) {
+    console.log(user);
+});
 
 // start the server
 
